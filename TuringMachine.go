@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
@@ -32,6 +34,12 @@ func main() {
 	getInitialState(machine)
 	getTapeContent(machine)
 	checkTheInput(machine)
+
+	var end string
+	fmt.Scanln(&end)
+	if end == "end" {
+		return
+	}
 }
 
 func printSample() {
@@ -46,17 +54,18 @@ func printSample() {
 	fmt.Println("end")
 	fmt.Println("Initial State:")
 	fmt.Println("q0")
-	fmt.Println("Tape Content")
+	fmt.Println("Tape Content:")
 	fmt.Println("aab")
 	fmt.Println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 }
 
 func getTransitions(machine *turingMachine) {
-	fmt.Println("Enter the transition rules line by line:")
+	fmt.Println("Enter the transition rules line by line: (enter 'end' when finished)")
 
-	var transitionString string
-	fmt.Scanln(&transitionString)
+	reader := bufio.NewReader(os.Stdin)
+	transitionString, _ := reader.ReadString('\n')
 	transitionString = strings.TrimSpace(transitionString)
+	transitionString = strings.ReplaceAll(transitionString, " ", "")
 
 	for transitionString != "end" {
 		transition := transition{}
@@ -78,7 +87,7 @@ func getTransitions(machine *turingMachine) {
 }
 
 func getFinalStates(machine *turingMachine) {
-	fmt.Println("Enter the final states:")
+	fmt.Println("Enter the final states: (enter 'end' when finished)")
 
 	var f string
 	fmt.Scanln(&f)
