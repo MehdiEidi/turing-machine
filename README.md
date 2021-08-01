@@ -19,7 +19,7 @@ end
 Initial State:
 q0
 
-Tape Content
+Tape Content:
 aab
 ```
 
