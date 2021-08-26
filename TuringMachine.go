@@ -3,24 +3,25 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os"
 	"strings"
 )
 
 type (
 	turingMachine struct {
-		transitions []transition
-		finalStates []string
-		tapeContent []string
+		transitions  []transition
+		finalStates  []string
+		tapeContent  []string
 		initialState string
 	}
 
 	transition struct {
-		currentState string
-		nextState string
-		inputCharacter string
+		currentState     string
+		nextState        string
+		inputCharacter   string
 		replaceCharacter string
-		rightOrLeft bool // true is right false is left
+		rightOrLeft      bool // true is right false is left
 	}
 )
 
@@ -36,7 +37,11 @@ func main() {
 	checkTheInput(machine)
 
 	var end string
-	fmt.Scanln(&end)
+	_, err := fmt.Scanln(&end)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	if end == "end" {
 		return
 	}
@@ -81,8 +86,9 @@ func getTransitions(machine *turingMachine) {
 
 		machine.transitions = append(machine.transitions, transition)
 
-		fmt.Scanln(&transitionString)
+		transitionString, _ = reader.ReadString('\n')
 		transitionString = strings.TrimSpace(transitionString)
+		transitionString = strings.ReplaceAll(transitionString, " ", "")
 	}
 }
 
