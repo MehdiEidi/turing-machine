@@ -1,5 +1,5 @@
 # Turing Machine
-Turing machine simulator and input acceptance checker.
+## Turing machine simulator and input acceptance checker.
 
 ![turing machine](https://www.sciencealert.com/images/2019-06/turing-machine.jpg)
 
